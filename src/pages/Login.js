@@ -24,7 +24,7 @@ function Login({ isAuth, setIsAuth}) {
                 })
             }
             onSubmit={(values)=> {
-                if(process.env.REACT_APP_MASTER_EMAIL === values.email && process.env.REACT_APP_MASTER_PASSWORD === values.password) {
+                if(values.email === 'admin@admin.com' && values.password === 'master1234') {
                     setIsAuth(true);
                     history.push('/users');
                 } else {
