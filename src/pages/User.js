@@ -51,7 +51,6 @@ function User() {
                         })
                         const newUserData = response.data;
                         setUser(newUserData);
-                        history.push('/users');
                     } catch (error) {
                         console.log(error);
                     }
