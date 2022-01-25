@@ -8,6 +8,22 @@ import Login from './pages/Login'
 
 function App() {
   const [isAuth, setIsAuth] = React.useState(false);
+
+  React.useEffect(() => {
+    function checkUserAuth() {
+      const item = localStorage.getItem("isAuth")
+  
+      setIsAuth(item);
+    }
+  
+    window.addEventListener('storage', checkUserAuth)
+  
+    return () => {
+      window.removeEventListener('storage', checkUserAuth)
+    }
+  }, [])
+
+  console.log(isAuth);
   return (
     <Router>
       <Route path='/' exact>

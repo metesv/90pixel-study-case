@@ -26,6 +26,7 @@ function Login({ isAuth, setIsAuth}) {
             onSubmit={(values)=> {
                 if(values.email === 'admin@admin.com' && values.password === 'master1234') {
                     setIsAuth(true);
+                    localStorage.setItem("isAuth", "true");
                     history.push('/users');
                 } else {
                     console.log('Wrong password or email...')
@@ -52,7 +53,6 @@ function Login({ isAuth, setIsAuth}) {
                                 { touched.password && errors.password && <span className="help-block text-danger">{errors.password}</span> }
                             </div>
                             <button type="submit" className="btn btn-primary">Login</button>
-                            {isAuth && <h3 style={{ color: 'green' }}>Success</h3>}
                         </Form>
                     </div>
                 </div>

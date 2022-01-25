@@ -2,10 +2,11 @@ import React from 'react';
 import { Formik, Form, Field } from 'formik';
 import axios from 'axios';
 import * as Yup from 'yup';
-import { useHistory } from 'react-router'
+import createHistory from 'history/createBrowserHistory'
+import Logout from './Logout';
 
 function AddUser() {
-    const history = useHistory();
+    const history = createHistory();
     return (
         <Formik
             initialValues={{ firstName: '', lastName: '' }}
@@ -36,9 +37,10 @@ function AddUser() {
                 <Form className="form-row" style={{ margin: 5 }}>
                     <Field type="text" value={values.firstName} name="firstName" className="form-group col-md-5" placeholder="FirstName..." onChange={handleChange} />
                     <Field type="test" value={values.lastName} name="lastName" className="form-group col-md-5" placeholder="LastName..." onChange={handleChange} />
-                    <button type="submit" className="form-group col-md-2">
+                    <button type="submit" className="form-group col-md-1">
                         Add User
                     </button>
+                    <Logout />
                 </Form>
             )} 
         </Formik>
