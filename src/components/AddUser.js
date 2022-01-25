@@ -2,9 +2,11 @@ import React from 'react';
 import { Formik, Form, Field } from 'formik';
 import axios from 'axios';
 import * as Yup from 'yup';
+import { useHistory } from 'react-router'
 
 function AddUser() {
-  return (
+    const history = useHistory();
+    return (
         <Formik
             initialValues={{ firstName: '', lastName: '' }}
             validationSchema={
@@ -21,6 +23,7 @@ function AddUser() {
                 }
                 try {
                     await axios.post(`https://61eff8fb732d93001778e76b.mockapi.io/users/`, input);
+                    history.go(0);
                 } catch (error) {
                     console.log(error);
                 }
