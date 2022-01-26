@@ -2,8 +2,9 @@ import React from 'react';
 import { Formik, Form, Field } from 'formik';
 import { useHistory  } from 'react-router-dom';
 import * as Yup from 'yup';
+import axios from 'axios';
 
-function Login({ isAuth, setIsAuth}) {
+function Login({ setIsAuth }) {
     const history = useHistory();
     const loginPageStyle = {
         margin: "32px auto 37px",
@@ -23,13 +24,22 @@ function Login({ isAuth, setIsAuth}) {
                     password: Yup.string().required('Password is required')
                 })
             }
-            onSubmit={(values)=> {
+            onSubmit={async (values)=> {
                 if(values.email === 'admin@admin.com' && values.password === 'master1234') {
                     setIsAuth(true);
                     localStorage.setItem("isAuth", "true");
                     history.push('/users');
                 } else {
-                    console.log('Wrong password or email...')
+                    const response = await axios.get(`https://61eff8fb732d93001778e76b.mockapi.io/users?email=${values.email}`);
+                    const { data } = response;
+                    if (data[0].password === values.password) {
+                        setIsAuth(true);
+                        localStorage.setItem("isAuth", "true");
+                        localStorage.setItem("currentUserId", data[0].id);
+                        history.push('/users');
+                    } else {
+                        console.log('Wrong password or email');
+                    }
                 }
             }}
         >
@@ -54,6 +64,8 @@ function Login({ isAuth, setIsAuth}) {
                             </div>
                             <button type="submit" className="btn btn-primary">Login</button>
                         </Form>
+                        <span>If you are not member go to register...</span><br />
+                        <button onClick={() => history.push('/register')} className="btn btn-primary">Go to Register</button>
                     </div>
                 </div>
             )} 

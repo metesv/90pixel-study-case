@@ -89,6 +89,14 @@ function User() {
                         >
                             Delete
                         </button>
+                        <button
+                            class="btn btn-secondary"
+                            onClick={() => {
+                                history.push('/users');
+                            }}
+                        >
+                            Back to UserTable
+                        </button>
                     </Form>
                 )} 
             </Formik>

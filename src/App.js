@@ -4,7 +4,8 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import ProtectedRoutes from './components/ProtectedRoutes';
 import Users from './pages/Users';
 import User from './pages/User';
-import Login from './pages/Login'
+import Login from './pages/Login';
+import Register from './pages/Register';
 
 function App() {
   const [isAuth, setIsAuth] = React.useState(false);
@@ -28,6 +29,9 @@ function App() {
     <Router>
       <Route path='/' exact>
         <Login isAuth={isAuth} setIsAuth={setIsAuth} />
+      </Route>
+      <Route path='/register' exact>
+        <Register />
       </Route>
 
       <ProtectedRoutes path='/users' component={Users} isAuth={isAuth} exact />

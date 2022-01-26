@@ -4,6 +4,7 @@ import AddUser from './AddUser';
 
 function UserTable({ users }) {
     const history = useHistory();
+    const currentUserId = localStorage.getItem("currentUserId");
     
     return (
         <>
@@ -12,6 +13,7 @@ function UserTable({ users }) {
                 <thead>
                     <tr>
                         <th scope="col">Index</th>
+                        <th scope="col">Email</th>
                         <th scope="col">First</th>
                         <th scope="col">Last</th>
                         <th scope="col">Detail</th>
@@ -19,9 +21,10 @@ function UserTable({ users }) {
                 </thead>
                 <tbody>
                     {
-                        users.map(({ id, firstName, lastName }, index) => (
+                        users.filter(({ id }) => id !== currentUserId).map(({ id, email, firstName, lastName }, index) => (
                             <tr>
                                 <th scope="row">{index + 1}</th>
+                                <td>{email}</td>
                                 <td>{firstName}</td>
                                 <td>{lastName}</td>
                                 <td>
